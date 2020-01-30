@@ -48,7 +48,7 @@ village_dataset <- read.csv("/village_dataset.csv")
 british<-village[which(village$british==1),]
 not_british<-village[which(village$british==0),]
 
-ml_british<-as.data.frame(cbind(british$forest_suitability,british%village_ID,
+ml_british<-as.data.frame(cbind(british$forest_suitability,british$village_ID,
 as.factor(british$land_tenure))
 
 ml_not_british<-as.data.frame(cbind(not_british$forest_suitability,not_british$village_ID,
@@ -94,6 +94,6 @@ If we map it out, this is what the actual (in the south) and counterfactual (in 
 
 The techniques I've used is straightforward and already well-established in the computer science literature - yet, the approach itself is not.
 
-As with many things in economics, the use of machine learning has yet to take a mainstream hold in the field. Yet, the use of these technique (in this case, leveraging off the predictive superiority of regression trees) allows us to probe into questions that we other couldn't (with our existing economics toolset)
+As with many things in economics, the use of machine learning has yet to take a mainstream hold in the field. Yet, the use of these techniques (in this case, leveraging off the predictive superiority of regression trees) allows us to probe into questions that we otherwise couldn't, within our existing economics toolset.
 
-I hope this example will motivate you to venture out into other possibilities outside economics - particularly to borrow from techniques in machine learning!
+I hope this example will motivate you to venture out into other possibilities outside economics. In my case, it's allowed to finally answer a long-standing question in the historical literature: what exactly is the legacy (both the good and bad) of British land tenure systems in India today?
