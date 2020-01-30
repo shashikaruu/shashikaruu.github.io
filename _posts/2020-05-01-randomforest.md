@@ -18,7 +18,7 @@ As an example in historical India, one can compare villages in a former British 
 
 ## Land tenures in colonial India
 
-BUT what if, within the colonised region, a variety of programs was enacted - some which are potentially good and some potentially bad for long-run development?
+BUT what if, within the colonised region, a variety of programs were enacted - some which are potentially good and some potentially bad for long-run development?
 
 How do you evaluate these programs? And what are their respective counterfactuals?
 
@@ -51,8 +51,8 @@ not_british<-village[which(village$british==0),]
 ml_british<-as.data.frame(cbind(british$forest_suitability,british%village_ID,
 as.factor(british$land_tenure))
 
-ml_not_british<-as.data.frame(cbind(not_british$forest_suitability,not_british%village_ID,
-as.factor(not_british$land_tenure))
+ml_not_british<-as.data.frame(cbind(not_british$forest_suitability,not_british$village_ID,
+as.factor(not_british$land_tenure)))
 
 #MAKE A TRAINING AND TEST SAMPLE
 set.seed(333)
