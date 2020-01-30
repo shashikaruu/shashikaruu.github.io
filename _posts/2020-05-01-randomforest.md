@@ -1,9 +1,8 @@
 ---
-title: "Simulating an alternate history - with machine learning"
+title: "Simulating an alternate history with machine learning [It's not science fiction, it's data science!]"
 date: 2018-01-28
 tags: [machine learning, history, development]
 header:
-  image: ""
 excerpt: "Machine Learning, History, Development"
 ---
 
@@ -13,15 +12,17 @@ Us development economists love to ask the question: "But what is your counterfac
 
 Let's take a colonial treatment as an example.
 
-Frequently, when we want to assess the long-term effects of being colonised, we find a comparison area that was almost colonised as a counterfactual group. This technique, pioneered by Dell (2010), famously uses a geographic regression discontinuity design framework. To put it simply, you compare regions that were colonised, with regions that were *almost* colonised - where borders between the two were arbitrarily designed.
-
-## Land tenures in colonial tenures
+Frequently, when we want to assess the long-term effects of being colonised, we find a comparison area that was almost colonised as a counterfactual group. This technique, pioneered by [Dell (2010)](https://scholar.harvard.edu/files/dell/files/ecta8121_0.pdf), uses a geographic regression discontinuity design framework. To put it simply: you compare regions that were colonised, with regions that were *almost* colonised - where borders between the two were arbitrarily designed.
 
 As an example in historical India, one can compare villages in a former British colonised region, with villages in a nearby Native Ruled State that was almost colonised, whose borders were determined arbitrarily by rivers.
 
-But what if, within the colonised region, the coloniser enacted a variety of programs - some which are potentially good and some potentially bad for long-run development? What then is the counterfactual comparison group?
+## Land tenures in colonial India
 
-This is the question I face in assessing the long-run effects of colonial land tenures in India. In my study area, the region south of the red border was colonised by the British. Here, the British established four different types of land tenures (depicted in the map below). Some were potentially bad for long-run development (for example, extractive feudal landlord tenures, *in blue*). However, some may be potentially good for long-run development (for example strong property rights cultivator villages, *in pink*).
+BUT what if, within the colonised region, a variety of programs was enacted - some which are potentially good and some potentially bad for long-run development?
+
+How do you evaluate these programs? And what are their respective counterfactuals?
+
+This is the question I face in assessing the long-run effects of colonial land tenures in India. In my study area (depicted below), the region south of the red border was colonised by the British. Here, the British established four different types of land tenures. Some were potentially bad for long-run development (for example, extractive **feudal landlord** tenures *in blue*). However, some may be potentially good for long-run development (for example strong **property rights-based** cultivator villages, *in pink*).
 
 ![svg]({{ site.url }}/images/act_institutions_v2.jpg)
 
@@ -29,7 +30,7 @@ If we want to assess their long-run effects, we must compare them with villages 
 
 ## Help us out, machine learning!
 
-In turns out, machine learning can help us out - a lot. We borrow from its techniques to simulate an alternate history. In my case, we can simulate the land tenures that would have been established in the non-colonised area, had the British actually colonised the region. We then use these as the comparison counterfactual groups to the actual British land tenures.
+In turns out, machine learning can help us out - a lot. Effectively, we can borrow from its predictive techniques to simulate an alternate history. In my case, we can simulate the land tenures that would have been established in the non-colonised area, had the British actually colonised the region. We then use these as the comparison counterfactual villages to the actual British land tenures.
 
 I can do this by exploiting the assignment program of these land systems. In this study area, different tenures were assigned by the British Imperial Forest Department, and were based on the quality of forests.
 If we map out the land suitability for forest (below) and visually compare it with the actual land tenures assigned, you can see the relationship between both.
@@ -62,7 +63,7 @@ test <- british[-samp, ]
 library("randomForest")
 model <- randomForest(land tenure ~ . - village_ID, data=train, na.action=na.roughfix, ntree=25000)
 
-#TEST SAMPLE Outputting
+#TEST SAMPLE OUTPUT
 
 prediction <- predict(model, newdata = test)
 table(prediction, test$institution)
@@ -85,10 +86,14 @@ for(i in 1:nrow(counterfactual)){
 
 ```
 
-If we map it out, this is what the actual and counterfactual land tenures look like in the study region. We can not compare the long-run effects of each British land tenure system, by comparing villages assigned the actual tenures with villages with its counterfactual villages in the non-colonised region.
+If we map it out, this is what the actual (in the south) and counterfactual (in the north) land tenures look like in the study region. We can now compare the long-run effects of each British land tenure system, by comparing villages assigned the actual tenures with villages with its counterfactual villages in the non-colonised region.
 
 ![svg]({{ site.url }}/images/cf_institutions.jpg)
 
-## A novel approach ... in economics
+## It's not science fiction - it's data science
 
-The approach I've used is straightforward and already well-established in the computer science literature ... yet (as with many things) it has to take a mainstream hold in economics. I hope this example will motivate you to venture out into other possibilities outside economics - particularly to borrow from techniques in machine learning and use to to answer questions that we otherwise couldn't, with our exiting tools in economics!
+The techniques I've used is straightforward and already well-established in the computer science literature - yet, the approach itself is not.
+
+As with many things in economics, the use of machine learning has yet to take a mainstream hold in the field. Yet, the use of these technique (in this case, leveraging off the predictive superiority of regression trees) allows us to probe into questions that we other couldn't (with our existing economics toolset)
+
+I hope this example will motivate you to venture out into other possibilities outside economics - particularly to borrow from techniques in machine learning!
