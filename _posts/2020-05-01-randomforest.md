@@ -1,5 +1,5 @@
 ---
-title: "Simulating an alternate history with machine learning [It's not science fiction, it's data science!]"
+title: "Simulating an alternate history - with machine learning"
 date: 2018-01-28
 tags: [machine learning, history, development]
 header:
